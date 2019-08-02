@@ -16,7 +16,7 @@ UINT8 collision_tiles[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
 						   23, 24, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60,
 						   64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 0};
 
-extern UINT8* tunnari_mod_Data[];
+extern UINT8 *tunnari_mod_Data[];
 
 void Start_STATE_GAME()
 {
@@ -28,7 +28,7 @@ void Start_STATE_GAME()
 		SpriteManagerLoad(i);
 	}
 
-	// Palette: LightGray, White, DarkGray, Black
+	// Palette: DarkGray, White, LightGray, Black
 	BGP_REG = 0xE1;
 	OBP0_REG = 0xE1;
 	OBP1_REG = 0xE1;
@@ -47,7 +47,7 @@ void Start_STATE_GAME()
 	NR52_REG = 0x80;
 	NR51_REG = 0xFF;
 	NR50_REG = 0x77;
-	
+
 	PlayMusic(tunnari_mod_Data, 3, 1);
 }
 

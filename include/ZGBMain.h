@@ -5,11 +5,11 @@
     _STATE(STATE_GAME) \
     STATE_DEF_END
 
-#define SPRITES                                            \
+#define SPRITES                        \
     _SPRITE_DMG(SPRITE_PLAYER, player) \
-    _SPRITE_DMG(SPRITE_FOOD, rock)      \
-    _SPRITE_DMG(SPRITE_BIG_FOOD, rock)  \
-    _SPRITE_DMG(SPRITE_GOAL, rock)      \
+    _SPRITE_DMG(SPRITE_FOOD, cherry)   \
+    _SPRITE_DMG(SPRITE_BIG_FOOD, pear) \
+    _SPRITE_DMG(SPRITE_GOAL, rock)     \
     SPRITE_DEF_END
 
 #include "ZGBMain_Init.h"
