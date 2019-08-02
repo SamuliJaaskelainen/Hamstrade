@@ -295,7 +295,14 @@ void Update_SPRITE_PLAYER()
     // Move player and check for collisions
     // Do two movements to get colliders from both directions
     collisionX = TranslateSprite(THIS, accelX / 100, 0);
-    collisionY = TranslateSprite(THIS, 0, accelY / 100);
+    if ((INT16)THIS->y < -accelY / 100)
+    {
+        collisionY = TranslateSprite(THIS, 0, -THIS->y);
+    }
+    else
+    {
+        collisionY = TranslateSprite(THIS, 0, accelY / 100);
+    }
 
     // X physics
     // Stop movement if we hit something
