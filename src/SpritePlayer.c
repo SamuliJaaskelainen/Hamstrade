@@ -23,12 +23,13 @@ const UINT16 wallJumpForcesY[] = {360, 350, 100, 100};
 #define respawnMoveSpeed 3
 
 // Animation frames (number of frames followed by all the frames to play)
-const UINT8 animIdle[] = {1, 1};
-const UINT8 animWalk[] = {2, 2, 3};
-const UINT8 animJumpUp[] = {1, 6};
-const UINT8 animJumpPeak[] = {1, 5};
+const UINT8 animIdle[] = {2, 0, 1};
+const UINT8 animWalk[] = {2, 2, 0};
+const UINT8 animWallSlide[] = {2, 3, 4};
+const UINT8 animJumpUp[] = {1, 5};
+const UINT8 animJumpPeak[] = {1, 6};
 const UINT8 animJumpDown[] = {1, 7};
-const UINT8 animRespawn[] = {3, 8, 9, 10};
+const UINT8 animRespawn[] = {4, 8, 9, 10, 6};
 
 typedef enum
 {
