@@ -29,9 +29,11 @@ void Start_STATE_GAME()
 	}
 
 	// Palette: LightGray, White, DarkGray, Black
-	BGP_REG = 0xE1;
-	OBP0_REG = 0xE1;
-	OBP1_REG = 0xE1;
+	// The binary numbers are in reverse order, with larger number meaning darker color:
+	// 11 (black) 10 (dark gray) 00 (white) 01 (light gray, also transparent)
+	BGP_REG = 0b11100001;
+	OBP0_REG = 0b11100001;
+	OBP1_REG = 0b11100001;
 
 	SHOW_SPRITES;
 
