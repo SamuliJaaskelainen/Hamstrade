@@ -433,7 +433,7 @@ void Update_SPRITE_PLAYER()
     {
         if (accelX < 100 && accelX > -100)
         {
-            SetSpriteAnim(THIS, animIdle, 1);
+            SetSpriteAnim(THIS, animIdle, 5);
         }
         else
         {
@@ -445,7 +445,7 @@ void Update_SPRITE_PLAYER()
     {
         if (wallSlide)
         {
-            SetSpriteAnim(THIS, animWallSlide, 1);
+            SetSpriteAnim(THIS, animWallSlide, 5);
         }
         else if (accelY > 60)
         {
