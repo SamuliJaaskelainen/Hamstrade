@@ -46,7 +46,8 @@ INT16 accelY;
 INT16 accelX;
 UINT8 jumpPeak;
 UINT8 poopJumped = 0;
-INT8 wallJumpFrames = -1;
+INT8 wallJumpFrames = 0;
+INT8 canWallJump = 0;
 INT16 wallJumpAccelX;
 UINT8 wallSlide = 0;
 
@@ -201,7 +202,7 @@ void Update_SPRITE_PLAYER()
     {
         if (KEY_TICKED(J_A))
         {
-            wallJumpFrames = -1;
+            canWallJump = 0;
             accelY = -jumpForces[poopAmount];
             jumpPeak = 0;
             moveState = ONAIR;
@@ -218,6 +219,11 @@ void Update_SPRITE_PLAYER()
     }
     else if (moveState == ONAIR)
     {
+        if (canWallJump == 0 && KEY_RELEASED(J_A))
+        {
+            canWallJump = 1;
+        }
+
         // Poop jump
         if (KEY_TICKED(J_B) && poopJumped == 0)
         {
@@ -236,12 +242,6 @@ void Update_SPRITE_PLAYER()
             jumpPeak = 1;
         }
 
-        // Enable wall jump when normal jump press ends
-        if (KEY_RELEASED(J_A))
-        {
-            wallJumpFrames = 0;
-        }
-
         if (jumpPeak == 0 && (KEY_PRESSED(J_A) || poopJumped != 0) && accelY > -350)
         {
             accelY -= 20;
@@ -251,7 +251,7 @@ void Update_SPRITE_PLAYER()
             if (collisionX == 0)
             {
                 accelY += 20;
-                
+
                 if (wallSlide > 0)
                 {
                     --wallSlide;
@@ -264,7 +264,7 @@ void Update_SPRITE_PLAYER()
                 accelY = 80;
 
                 // Wall jump
-                if (KEY_PRESSED(J_A) && wallJumpFrames == 0)
+                if (KEY_PRESSED(J_A) && wallJumpFrames == 0 && canWallJump == 1)
                 {
                     accelY = -wallJumpForcesY[poopAmount];
 
@@ -277,6 +277,7 @@ void Update_SPRITE_PLAYER()
                         wallJumpAccelX = -wallJumpForcesX[poopAmount];
                     }
                     wallJumpFrames = 10;
+                    canWallJump = 0;
                     jumpPeak = 0;
                     PlayFx(CHANNEL_1, 5, 0x71, 0x03, 0x44, 0xc8, 0x80);
                 }
