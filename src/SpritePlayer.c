@@ -48,6 +48,7 @@ UINT8 jumpPeak;
 UINT8 poopJumped = 0;
 INT8 wallJumpFrames = -1;
 INT16 wallJumpAccelX;
+UINT8 wallSlide = 0;
 
 // Storing collisions around player after movement
 UINT8 collisionX;
@@ -250,10 +251,16 @@ void Update_SPRITE_PLAYER()
             if (collisionX == 0)
             {
                 accelY += 20;
+                
+                if (wallSlide > 0)
+                {
+                    --wallSlide;
+                }
             }
             else
             {
                 // Wall slide
+                wallSlide = 2;
                 accelY = 80;
 
                 // Wall jump
@@ -404,7 +411,11 @@ void Update_SPRITE_PLAYER()
     }
     else
     {
-        if (accelY > 60)
+        if (wallSlide)
+        {
+            SetSpriteAnim(THIS, animWallSlide, 1);
+        }
+        else if (accelY > 60)
         {
             SetSpriteAnim(THIS, animJumpDown, 1);
         }
