@@ -6,7 +6,9 @@ UINT8 bank_STATE_GAME = 2;
 
 #include "..\res\src\tiles.h"
 #include "..\res\src\map.h"
+#include "..\res\src\map2.h"
 
+#include "Keys.h"
 #include "ZGBMain.h"
 #include "Scroll.h"
 #include "SpriteManager.h"
@@ -18,14 +20,16 @@ UINT8 collision_tiles[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
 
 extern UINT8 *tunnari_mod_Data[];
 
+UINT8 level = 0;
+
 void Start_STATE_GAME()
 {
 	// Load all sprites
-	UINT8 i;
+	UINT8 j;
 	SPRITES_8x16;
-	for (i = 0; i != N_SPRITE_TYPES; ++i)
+	for (j = 0; j != N_SPRITE_TYPES; ++j)
 	{
-		SpriteManagerLoad(i);
+		SpriteManagerLoad(j);
 	}
 
 	// The binary numbers are in reverse order, with larger number meaning darker color:
@@ -62,4 +66,22 @@ void Start_STATE_GAME()
 // All game logic is in SpritePlayer
 void Update_STATE_GAME()
 {
+	if (KEY_TICKED(J_SELECT))
+	{
+		NextLevel();
+	}
+}
+
+void NextLevel()
+{
+	if (level == 0)
+	{
+		InitScroll(map2Width, map2Height, map2, collision_tiles, 0, 4);
+		level = 1;
+	}
+	else
+	{
+		InitScroll(mapWidth, mapHeight, map, collision_tiles, 0, 3);
+		level = 0;
+	}
 }

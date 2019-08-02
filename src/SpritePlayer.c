@@ -4,6 +4,8 @@
 #include "main.h"
 UINT8 bank_SPRITE_PLAYER = 2;
 
+void NextLevel();
+
 #include "Keys.h"
 #include "SpriteManager.h"
 #include "Sound.h"
@@ -419,6 +421,8 @@ void Update_SPRITE_PLAYER()
         {
             if (CheckCollision(THIS, spr))
             {
+                SpriteManagerRemoveSprite(spr);
+                NextLevel();
             }
         }
     }
