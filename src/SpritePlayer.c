@@ -101,7 +101,7 @@ void StepAudio()
     if (moveState == GROUNDED && stepSound > 12)
     {
         stepSound = 0;
-        PlayFx(CHANNEL_4, 4, 0x05, 0x31, 0x78, 0x80);
+        //PlayFx(CHANNEL_4, 4, 0x05, 0x31, 0x78, 0x80);
     }
 }
 
@@ -206,7 +206,9 @@ void Update_SPRITE_PLAYER()
             accelY = -jumpForces[poopAmount];
             jumpPeak = 0;
             moveState = ONAIR;
-            PlayFx(CHANNEL_1, 5, 0x71, 0x03, 0x44, 0xc8, 0x80);
+            // JUMP SOUND
+            PlayFx(CHANNEL_1, 30, 0x77, 0x00, 0xab, 0xc4, 0xc6);
+            //PlayFx(CHANNEL_1, 5, 0x71, 0x03, 0x44, 0xc8, 0x80);
         }
         else if (KEY_TICKED(J_B))
         {
@@ -214,6 +216,9 @@ void Update_SPRITE_PLAYER()
             {
                 poopAmount--;
                 accelX += 100;
+                
+                // POOP SOUND
+                PlayFx(CHANNEL_1, 30, 0x49, 0x28, 0x39, 0x07, 0xc6);
             }
         }
     }
@@ -233,7 +238,9 @@ void Update_SPRITE_PLAYER()
                 poopAmount--;
                 accelY = -poopJumpForces[poopAmount];
                 jumpPeak = 0;
-                PlayFx(CHANNEL_1, 5, 0x71, 0x03, 0x44, 0xc8, 0x80);
+                // POOP SOUND
+                PlayFx(CHANNEL_1, 30, 0x49, 0x28, 0x39, 0x07, 0xc6);
+                //PlayFx(CHANNEL_1, 5, 0x71, 0x03, 0x44, 0xc8, 0x80);
             }
         }
 
@@ -279,7 +286,11 @@ void Update_SPRITE_PLAYER()
                     wallJumpFrames = 10;
                     canWallJump = 0;
                     jumpPeak = 0;
-                    PlayFx(CHANNEL_1, 5, 0x71, 0x03, 0x44, 0xc8, 0x80);
+
+                    // JUMP SOUND
+                    PlayFx(CHANNEL_1, 30, 0x77, 0x00, 0xab, 0xc4, 0xc6);
+
+                    //PlayFx(CHANNEL_1, 5, 0x71, 0x03, 0x44, 0xc8, 0x80);
                 }
             }
 
@@ -353,10 +364,13 @@ void Update_SPRITE_PLAYER()
         {
             if (moveState == ONAIR)
             {
-                PlayFx(CHANNEL_4, 4, 0x32, 0x71, 0x73, 0x80);
                 stepSound = 6;
                 poopJumped = 0;
                 moveState = GROUNDED;
+
+                // LAND SOUND
+                PlayFx(CHANNEL_4, 30, 0x0e, 0x21, 0x00, 0xc0);
+                //PlayFx(CHANNEL_4, 4, 0x32, 0x71, 0x73, 0x80);
             }
             accelY = 100;
         }
@@ -376,8 +390,11 @@ void Update_SPRITE_PLAYER()
                 if (poopAmount <= 3)
                 {
                     poopAmount++;
-                    PlayFx(CHANNEL_4, 5, 0x1c, 0xe5, 0x7a, 0xc0);
                     SpriteManagerRemoveSprite(spr);
+
+                    // EAT SOUND
+                    PlayFx(CHANNEL_1, 30, 0x4c, 0x1a, 0x6a, 0xb0, 0xc6);
+                    //PlayFx(CHANNEL_4, 5, 0x1c, 0xe5, 0x7a, 0xc0);
                 }
             }
         }
@@ -390,8 +407,11 @@ void Update_SPRITE_PLAYER()
                     checkpointX = THIS->x;
                     checkpointY = THIS->y;
                     poopAmount = 3;
-                    PlayFx(CHANNEL_4, 5, 0x1c, 0xe5, 0x7a, 0xc0);
                     SpriteManagerRemoveSprite(spr);
+                    
+                    // EAT SOUND
+                    PlayFx(CHANNEL_1, 30, 0x4c, 0x1a, 0x6a, 0xb0, 0xc6);
+                    //PlayFx(CHANNEL_4, 5, 0x1c, 0xe5, 0x7a, 0xc0);
                 }
             }
         }
@@ -445,7 +465,10 @@ void Update_SPRITE_PLAYER()
         moveState = RESPAWN;
         THIS->flags = 0;
         SetSpriteAnim(THIS, animRespawn, 15);
-        PlayFx(CHANNEL_1, 5, 0x73, 0x03, 0x4c, 0xfa, 0x80);
+
+        // HURT SOUND
+        PlayFx(CHANNEL_4, 30, 0x00, 0x39, 0x18, 0xc0);
+        //PlayFx(CHANNEL_1, 5, 0x73, 0x03, 0x4c, 0xfa, 0x80);
     }
 }
 
