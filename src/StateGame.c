@@ -48,7 +48,7 @@ void Start_STATE_GAME()
 	SHOW_SPRITES;
 
 	// Follow player while scrolling
-	scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 10, 96);
+	scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 40, 96);
 
 	// Load level
 	InitScrollTiles(0, &tiles, 3);
