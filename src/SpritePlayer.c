@@ -401,8 +401,8 @@ void Update_SPRITE_PLAYER()
         {
             if (CheckCollision(THIS, spr))
             {
-                SpriteManagerRemoveSprite(spr);
                 NextLevel();
+                return;
             }
         }
     }

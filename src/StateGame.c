@@ -74,6 +74,16 @@ void Update_STATE_GAME()
 
 void NextLevel()
 {
+	UINT8 i;
+	struct Sprite *spr;
+	SPRITEMANAGER_ITERATE(i, spr)
+	{
+		if (spr->type != SPRITE_PLAYER)
+		{
+			SpriteManagerRemoveSprite(spr);
+		}
+	}
+
 	if (level == 0)
 	{
 		InitScroll(map2Width, map2Height, map2, collision_tiles, 0, 4);
