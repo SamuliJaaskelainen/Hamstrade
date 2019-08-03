@@ -14,6 +14,7 @@ void NextLevel();
 #include "SpriteManager.h"
 #include "Sound.h"
 #include "ZGBMain.h"
+#include "Scroll.h"
 
 // Player fatness
 UINT8 poopAmount = 3;
@@ -123,6 +124,7 @@ void ResetState()
     subpixelX = 0;
     subpixelY = 0;
     UpdateSpriteSize();
+}
 
 // Set starting position and collider size
 void Start_SPRITE_PLAYER()
@@ -155,7 +157,7 @@ void UpdateUI()
     // UI
     for (i = 0; i < 3; ++i)
     {
-        uiPoop[i]->x = (THIS->x - 16) + (16 * i);
+        uiPoop[i]->x = scroll_x + (16 * i); // (THIS->x - 16) + (16 * i);
 
         if (poopAmount > i)
         {
@@ -425,10 +427,10 @@ void Update_SPRITE_PLAYER()
         subpixelX = 0;
     }
     else
-    { 
+    {
         subpixelX = subpixelX % 100;
     }
-    
+
     if (collisionY)
     {
         subpixelY = 0;
@@ -437,8 +439,6 @@ void Update_SPRITE_PLAYER()
     {
         subpixelY = subpixelY % 100;
     }
-    
-
 
     // X physics
     // Stop movement if we hit something
