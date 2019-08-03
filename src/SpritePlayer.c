@@ -132,6 +132,24 @@ void UpdateUI()
     }
 }
 
+void SpawnPoop(UINT8 poopType)
+{
+    poopAmount--;
+
+    // POOP SOUND
+    PlayFx(CHANNEL_1, 30, 0x49, 0x28, 0x39, 0x07, 0xc6);
+    //PlayFx(CHANNEL_1, 5, 0x71, 0x03, 0x44, 0xc8, 0x80);
+
+    if (THIS->flags == S_FLIPX)
+    {
+        SpriteManagerAdd(poopType, THIS->x + 8, THIS->y);
+    }
+    else
+    {
+        SpriteManagerAdd(poopType, THIS->x - 8, THIS->y);
+    }
+}
+
 void Update_SPRITE_PLAYER()
 {
     // Respawn
@@ -243,19 +261,16 @@ void Update_SPRITE_PLAYER()
         {
             if (poopAmount > 0)
             {
-                poopAmount--;
-
-                if (THIS->flags == 0)
-                {
-                    accelX += 100;
-                }
-                else
+                if (THIS->flags == S_FLIPX)
                 {
                     accelX -= 100;
                 }
+                else
+                {
+                    accelX += 100;
+                }
 
-                // POOP SOUND
-                PlayFx(CHANNEL_1, 30, 0x49, 0x28, 0x39, 0x07, 0xc6);
+                SpawnPoop(SPRITE_GROUND_POOP);
             }
         }
     }
@@ -272,12 +287,10 @@ void Update_SPRITE_PLAYER()
             if (poopAmount > 0)
             {
                 poopJumped = 1;
-                poopAmount--;
                 accelY = -poopJumpForces[poopAmount];
                 jumpPeak = 0;
-                // POOP SOUND
-                PlayFx(CHANNEL_1, 30, 0x49, 0x28, 0x39, 0x07, 0xc6);
-                //PlayFx(CHANNEL_1, 5, 0x71, 0x03, 0x44, 0xc8, 0x80);
+
+                SpawnPoop(SPRITE_AIR_POOP);
             }
         }
 
