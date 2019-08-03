@@ -439,7 +439,7 @@ void Update_SPRITE_PLAYER()
         {
             if (CheckCollision(THIS, spr))
             {
-                if (poopAmount <= 3)
+                if (poopAmount < 3)
                 {
                     poopAmount++;
                     SpriteManagerRemoveSprite(spr);
@@ -454,7 +454,8 @@ void Update_SPRITE_PLAYER()
         {
             if (CheckCollision(THIS, spr))
             {
-                if (poopAmount <= 3)
+                // You can always collect the big food because it doubles as a checkpoint.
+                //if (poopAmount < 3)
                 {
                     checkpointX = THIS->x;
                     checkpointY = THIS->y;
