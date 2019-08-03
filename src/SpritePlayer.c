@@ -524,7 +524,7 @@ void Update_SPRITE_PLAYER()
                     SpriteManagerRemoveSprite(spr);
 
                     // EAT SOUND
-                    PlayFx(CHANNEL_1, 30, 0x4c, 0x1a, 0x6a, 0xb0, 0xc6);
+                    PlayFx(CHANNEL_1, 30, 0x1e, 0x00, 0x1a, 0xdf, 0xc6);
                     //PlayFx(CHANNEL_4, 5, 0x1c, 0xe5, 0x7a, 0xc0);
 
                     UpdateSpriteSize();
@@ -545,7 +545,7 @@ void Update_SPRITE_PLAYER()
                     SpriteManagerRemoveSprite(spr);
 
                     // EAT SOUND
-                    PlayFx(CHANNEL_1, 30, 0x4c, 0x1a, 0x6a, 0xb0, 0xc6);
+                    PlayFx(CHANNEL_1, 30, 0x7a, 0x41, 0x09, 0x71, 0xc6);
                     //PlayFx(CHANNEL_4, 5, 0x1c, 0xe5, 0x7a, 0xc0);
 
                     UpdateSpriteSize();
