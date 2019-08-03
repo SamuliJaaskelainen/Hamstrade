@@ -611,7 +611,7 @@ void Update_SPRITE_PLAYER()
     // Hurt
     // When certain tiles are hit or player falls off the screen, play sound and respawn them
     // Note that all hurting tiles are in sequence for easier check here
-    if (THIS->y > 126 || KEY_TICKED(J_SELECT) || (collisionY > 46 && collisionY < 56) || (collisionX > 46 && collisionX < 56))
+    if (THIS->y > 126 || KEY_TICKED(J_SELECT) || (collisionY > 85 && collisionY < 89) || (collisionX > 101 && collisionX < 106))
     {
         moveState = RESPAWN;
         THIS->flags = 0;
