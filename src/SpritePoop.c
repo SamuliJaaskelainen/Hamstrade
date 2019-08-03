@@ -5,9 +5,8 @@ UINT8 bank_SPRITE_AIR_POOP = 2;
 
 #include "SpriteManager.h"
 
-const UINT8 animBigPoop[] = {1, 0};
-const UINT8 animGroundPoop[] = {3, 1, 2, 3};
-const UINT8 animAirPoop[] = {1, 1};
+const UINT8 animGroundPoop[] = {3, 0, 1, 2};
+const UINT8 animAirPoop[] = {1, 0};
 
 const UINT8 CUSTOM_DATA_LIFETIME = 0;
 const UINT8 CUSTOM_DATA_YVEL = 1;

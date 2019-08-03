@@ -36,9 +36,9 @@ const UINT8 animJumpDown[] = {1, 7};
 const UINT8 animRespawn[] = {4, 8, 9, 10, 6};
 
 // UI poop animation frames
-const UINT8 animUIPoop[] = {1, 1};
-const UINT8 animUIPoopPerish[] = {3, 1, 2, 3};
-const UINT8 animUIPoopGone[] = {1, 3};
+const UINT8 animUIPoop[] = {1, 0};
+const UINT8 animUIPoopPerish[] = {3, 0, 1, 2};
+const UINT8 animUIPoopGone[] = {1, 2};
 
 typedef enum
 {
