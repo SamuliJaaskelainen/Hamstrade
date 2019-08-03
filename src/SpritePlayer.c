@@ -217,8 +217,16 @@ void Update_SPRITE_PLAYER()
             if (poopAmount > 0)
             {
                 poopAmount--;
-                accelX += 100;
-                
+
+                if (THIS->flags == 0)
+                {
+                    accelX += 100;
+                }
+                else
+                {
+                    accelX -= 100;
+                }
+
                 // POOP SOUND
                 PlayFx(CHANNEL_1, 30, 0x49, 0x28, 0x39, 0x07, 0xc6);
             }
@@ -410,7 +418,7 @@ void Update_SPRITE_PLAYER()
                     checkpointY = THIS->y;
                     poopAmount = 3;
                     SpriteManagerRemoveSprite(spr);
-                    
+
                     // EAT SOUND
                     PlayFx(CHANNEL_1, 30, 0x4c, 0x1a, 0x6a, 0xb0, 0xc6);
                     //PlayFx(CHANNEL_4, 5, 0x1c, 0xe5, 0x7a, 0xc0);
