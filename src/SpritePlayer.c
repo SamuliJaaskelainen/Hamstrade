@@ -39,6 +39,10 @@ const UINT8 animJumpUp[] = {1, 5};
 const UINT8 animJumpPeak[] = {1, 6};
 const UINT8 animJumpDown[] = {1, 7};
 const UINT8 animRespawn[] = {4, 8, 9, 10, 6};
+const UINT8 animPoop[] = {2, 11, 0};
+const UINT8 animEat[] = {2, 12, 0};
+UINT8 poopAnimFrames;
+UINT8 eatAnimFrames;
 
 // UI poop animation frames
 const UINT8 animUIPoop[] = {1, 0};
@@ -185,6 +189,7 @@ void SpawnPoop(UINT8 poopType)
 {
     poopAmount--;
     UpdateSpriteSize();
+    poopAnimFrames = 10;
 
     // POOP SOUND
     PlayFx(CHANNEL_1, 30, 0x49, 0x28, 0x39, 0x07, 0xc6);
@@ -514,6 +519,7 @@ void Update_SPRITE_PLAYER()
             {
                 if (poopAmount < 3)
                 {
+                    eatAnimFrames = 10;
                     poopAmount++;
                     SpriteManagerRemoveSprite(spr);
 
@@ -532,6 +538,7 @@ void Update_SPRITE_PLAYER()
                 // You can always collect the big food because it doubles as a checkpoint.
                 //if (poopAmount < 3)
                 {
+                    eatAnimFrames = 10;
                     checkpointX = THIS->x;
                     checkpointY = THIS->y;
                     poopAmount = 3;
@@ -557,7 +564,17 @@ void Update_SPRITE_PLAYER()
 
     // Animation
     // Play correct animation based on current state & input
-    if (moveState == GROUNDED)
+    if (eatAnimFrames > 0)
+    {
+        SetSpriteAnim(THIS, animEat, 5);
+        eatAnimFrames--;
+    }
+    else if (poopAnimFrames > 0)
+    {
+        SetSpriteAnim(THIS, animPoop, 5);
+        poopAnimFrames--;
+    }
+    else if (moveState == GROUNDED)
     {
         if (accelX < 100 && accelX > -100)
         {
