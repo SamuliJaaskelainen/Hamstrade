@@ -10,6 +10,7 @@
     _SPRITE_DMG(SPRITE_FOOD, cherry)     \
     _SPRITE_DMG(SPRITE_BIG_FOOD, pear)   \
     _SPRITE_DMG(SPRITE_GOAL, goalbottle) \
+    _SPRITE_DMG(SPRITE_UI_POOP, player)  \
     SPRITE_DEF_END
 
 #include "ZGBMain_Init.h"

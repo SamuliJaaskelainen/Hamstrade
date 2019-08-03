@@ -14,6 +14,8 @@ void NextLevel();
 // Player fatness
 UINT8 poopAmount = 3;
 
+struct Sprite *uiPoop[4];
+
 // Movement values for tweaking platforming feel
 const UINT8 walkSpeeds[] = {200, 190, 130, 110};
 const UINT8 jumpForces[] = {100, 120, 180, 200};
@@ -84,6 +86,7 @@ void ResetState()
     collisionY = 0;
     groundCollision = 0;
     jumpPeak = 0;
+    poopAmount = 3;
     moveState = ONAIR;
 }
 
@@ -95,6 +98,10 @@ void Start_SPRITE_PLAYER()
     THIS->coll_w = 12;
     THIS->coll_h = 14;
     ResetState();
+
+    uiPoop[0] = SpriteManagerAdd(SPRITE_UI_POOP, 16, 16);
+    uiPoop[1] = SpriteManagerAdd(SPRITE_UI_POOP, 16, 16);
+    uiPoop[2] = SpriteManagerAdd(SPRITE_UI_POOP, 16, 16);
 }
 
 // Play stepping sound if we have ran enough from last time
@@ -104,6 +111,24 @@ void StepAudio()
     {
         stepSound = 0;
         //PlayFx(CHANNEL_4, 4, 0x05, 0x31, 0x78, 0x80);
+    }
+}
+
+void UpdateUI()
+{
+    // UI
+    for (i = 0; i < 3; ++i)
+    {
+        uiPoop[i]->x = (THIS->x - 16) + (16 * i);
+
+        if (poopAmount > i)
+        {
+            uiPoop[i]->y = 0;
+        }
+        else
+        {
+            uiPoop[i]->y = -8;
+        }
     }
 }
 
@@ -158,6 +183,8 @@ void Update_SPRITE_PLAYER()
                 THIS->y++;
             }
         }
+
+        UpdateUI();
 
         if (THIS->x == checkpointX && THIS->y == checkpointY)
         {
@@ -484,6 +511,9 @@ void Update_SPRITE_PLAYER()
         PlayFx(CHANNEL_4, 30, 0x00, 0x39, 0x18, 0xc0);
         //PlayFx(CHANNEL_1, 5, 0x73, 0x03, 0x4c, 0xfa, 0x80);
     }
+
+    // Update Ui after all the movement
+    UpdateUI();
 }
 
 void Destroy_SPRITE_PLAYER()
