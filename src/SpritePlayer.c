@@ -35,6 +35,11 @@ const UINT8 animJumpPeak[] = {1, 6};
 const UINT8 animJumpDown[] = {1, 7};
 const UINT8 animRespawn[] = {4, 8, 9, 10, 6};
 
+// UI poop animation frames
+const UINT8 animUIPoop[] = {1, 1};
+const UINT8 animUIPoopPerish[] = {3, 1, 2, 3};
+const UINT8 animUIPoopGone[] = {1, 3};
+
 typedef enum
 {
     GROUNDED, // When player is on ground
@@ -99,9 +104,11 @@ void Start_SPRITE_PLAYER()
     THIS->coll_h = 14;
     ResetState();
 
-    uiPoop[0] = SpriteManagerAdd(SPRITE_UI_POOP, 16, 16);
-    uiPoop[1] = SpriteManagerAdd(SPRITE_UI_POOP, 16, 16);
-    uiPoop[2] = SpriteManagerAdd(SPRITE_UI_POOP, 16, 16);
+    for (i = 0; i < 3; ++i)
+    {
+        uiPoop[i] = SpriteManagerAdd(SPRITE_UI_POOP, 16, 0);
+        SetSpriteAnim(uiPoop[i], animUIPoop, 1);
+    }
 }
 
 // Play stepping sound if we have ran enough from last time
@@ -123,11 +130,22 @@ void UpdateUI()
 
         if (poopAmount > i)
         {
-            uiPoop[i]->y = 0;
+            SetSpriteAnim(uiPoop[i], animUIPoop, 1);
+            //uiPoop[i]->y = 0;
         }
         else
         {
-            uiPoop[i]->y = -8;
+            if (uiPoop[i]->anim_data == animUIPoopGone ||
+                uiPoop[i]->current_frame == animUIPoopPerish[0]-1)
+            {
+                SetSpriteAnim(uiPoop[i], animUIPoopGone, 1);
+            }
+            else
+            {
+                SetSpriteAnim(uiPoop[i], animUIPoopPerish, 15);
+            }
+            
+            //uiPoop[i]->y = -8;
         }
     }
 }
