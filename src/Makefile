@@ -1,4 +1,4 @@
-PROJECT_NAME = HAMSTRADE
+PROJECT_NAME = poopster
 
 all: build_gb
 
