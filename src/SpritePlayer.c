@@ -133,9 +133,9 @@ void ResetState()
 // Set starting position and collider size
 void Start_SPRITE_PLAYER()
 {
-    THIS->coll_x = 2;
+    THIS->coll_x = 0;
     THIS->coll_y = 2;
-    THIS->coll_w = 12;
+    THIS->coll_w = 16;
     THIS->coll_h = 14;
     ResetState();
 
