@@ -60,6 +60,9 @@ INT8 canWallJump = 0;
 INT16 wallJumpAccelX;
 UINT8 wallSlide = 0;
 
+INT16 subpixelX;
+INT16 subpixelY;
+
 // Storing collisions around player after movement
 UINT8 collisionX;
 UINT8 collisionY;
@@ -93,6 +96,8 @@ void ResetState()
     jumpPeak = 0;
     poopAmount = 3;
     moveState = ONAIR;
+    subpixelX = 0;
+    subpixelY = 0;
 }
 
 // Set starting position and collider size
@@ -375,20 +380,45 @@ void Update_SPRITE_PLAYER()
 
     // Move player and check for collisions
     // Do two movements to get colliders from both directions
-    collisionX = TranslateSprite(THIS, accelX / 100, 0);
-    if ((INT16)THIS->y < -accelY / 100)
+
+    subpixelX += accelX;
+    subpixelY += accelY;
+
+    collisionX = TranslateSprite(THIS, subpixelX / 100, 0);
+    if ((INT16)THIS->y < -subpixelY / 100)
     {
         collisionY = TranslateSprite(THIS, 0, -THIS->y);
+        subpixelY = 0;
     }
     else
     {
-        collisionY = TranslateSprite(THIS, 0, accelY / 100);
+        collisionY = TranslateSprite(THIS, 0, subpixelY / 100);
     }
+
+    if (collisionX)
+    {
+        subpixelX = 0;
+    }
+    else
+    { 
+        subpixelX = subpixelX % 100;
+    }
+    
+    if (collisionY)
+    {
+        subpixelY = 0;
+    }
+    else
+    {
+        subpixelY = subpixelY % 100;
+    }
+    
+
 
     // X physics
     // Stop movement if we hit something
     // Otherwise drag
-    if (collisionX != 0 && wallJumpFrames < 1)
+    if (collisionX && wallJumpFrames < 1)
     {
         accelX = 0;
     }
