@@ -39,7 +39,7 @@ void Start_STATE_GAME()
 	// 11 (black)
 
 	// Bg Palette: DarkGray, White, LightGray, Black
-	BGP_REG = 0b11010010;
+	BGP_REG = 0b11100100;
 
 	// Sprite Palette: DarkGray, White, LightGray, Black
 	OBP0_REG = 0b11010010;

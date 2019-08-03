@@ -22,9 +22,9 @@ UINT8 poopAmount = 3;
 struct Sprite *uiPoop[4];
 
 // Movement values for tweaking platforming feel
-const UINT8 walkSpeeds[] = {200, 190, 130, 110};
-const UINT8 jumpForces[] = {100, 120, 180, 200};
-const UINT8 poopJumpForces[] = {200, 180, 120, 100};
+const UINT8 walkSpeeds[] = {170, 150, 130, 110};
+const UINT8 jumpForces[] = {100, 100, 100, 100};
+const UINT8 poopJumpForces[] = {130, 120, 110, 100};
 const UINT16 wallJumpForcesX[] = {260, 250, 150, 150};
 const UINT16 wallJumpForcesY[] = {360, 350, 100, 100};
 #define walkIncrease 50
