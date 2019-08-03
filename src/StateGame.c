@@ -66,10 +66,6 @@ void Start_STATE_GAME()
 // All game logic is in SpritePlayer
 void Update_STATE_GAME()
 {
-	if (KEY_TICKED(J_SELECT))
-	{
-		NextLevel();
-	}
 }
 
 void NextLevel()

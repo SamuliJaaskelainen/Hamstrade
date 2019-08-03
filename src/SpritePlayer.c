@@ -554,11 +554,13 @@ void Update_SPRITE_PLAYER()
         }
         else if (spr->type == SPRITE_GOAL)
         {
-            if (CheckCollision(THIS, spr))
+            // We only have one level so no need to change level
+            /* if (CheckCollision(THIS, spr))
             {
                 NextLevel();
                 return;
             }
+            */
         }
     }
 
