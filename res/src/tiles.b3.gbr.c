@@ -1,5 +1,5 @@
-#pragma bank 0
-unsigned char bank_tiles = 0;
+#pragma bank 3
+unsigned char bank_tiles = 3;
 const unsigned char tiles_tiles[] = {
 	//Frame 0
 	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,

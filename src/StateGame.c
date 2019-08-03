@@ -6,7 +6,6 @@ UINT8 bank_STATE_GAME = 2;
 
 #include "..\res\src\tiles.h"
 #include "..\res\src\map.h"
-#include "..\res\src\map2.h"
 
 #include "Keys.h"
 #include "ZGBMain.h"
@@ -82,7 +81,7 @@ void NextLevel()
 
 	if (level == 0)
 	{
-		InitScroll(map2Width, map2Height, map2, collision_tiles, 0, 4);
+		//InitScroll(map2Width, map2Height, map2, collision_tiles, 0, 4);
 		level = 1;
 	}
 	else
