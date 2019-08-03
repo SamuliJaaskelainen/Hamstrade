@@ -107,7 +107,7 @@ void StepAudio()
     }
 }
 
-void SpawnPoop()
+void SpawnPoop(UINT8 poopType)
 {
     poopAmount--;
 
@@ -117,11 +117,11 @@ void SpawnPoop()
     
     if (THIS->flags == S_FLIPX)
     {
-        SpriteManagerAdd(SPRITE_POOP, THIS->x + 8, THIS->y);
+        SpriteManagerAdd(poopType, THIS->x + 8, THIS->y);
     }
     else
     {
-        SpriteManagerAdd(SPRITE_POOP, THIS->x - 8, THIS->y);
+        SpriteManagerAdd(poopType, THIS->x - 8, THIS->y);
     }
 }
 
@@ -243,7 +243,7 @@ void Update_SPRITE_PLAYER()
                     accelX += 100;
                 }
                 
-                SpawnPoop();
+                SpawnPoop(SPRITE_GROUND_POOP);
             }
         }
     }
@@ -263,7 +263,7 @@ void Update_SPRITE_PLAYER()
                 accelY = -poopJumpForces[poopAmount];
                 jumpPeak = 0;
 
-                SpawnPoop();
+                SpawnPoop(SPRITE_AIR_POOP);
             }
         }
 
@@ -278,6 +278,8 @@ void Update_SPRITE_PLAYER()
         }
         else if (accelY < 300)
         {
+            poopJumped = 0;
+
             if (collisionX == 0)
             {
                 accelY += 20;
@@ -431,7 +433,7 @@ void Update_SPRITE_PLAYER()
                     checkpointY = THIS->y;
                     poopAmount = 3;
                     SpriteManagerRemoveSprite(spr);
-                    
+
                     // EAT SOUND
                     PlayFx(CHANNEL_1, 30, 0x4c, 0x1a, 0x6a, 0xb0, 0xc6);
                     //PlayFx(CHANNEL_4, 5, 0x1c, 0xe5, 0x7a, 0xc0);
