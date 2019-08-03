@@ -6,6 +6,8 @@ UINT8 bank_STATE_GAME = 2;
 
 #include "..\res\src\tiles.h"
 #include "..\res\src\map.h"
+#include "..\res\src\titlescreen.h"
+#include "..\res\src\titlescreen_tileset.h"
 
 #include "Keys.h"
 #include "ZGBMain.h"
@@ -18,6 +20,7 @@ UINT8 collision_tiles[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
 						   64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 0};
 
 extern UINT8 *poopster_mod_Data[];
+extern UINT8 *tunnari_mod_Data[];
 
 UINT8 level = 0;
 
@@ -46,12 +49,9 @@ void Start_STATE_GAME()
 
 	SHOW_SPRITES;
 
-	// Follow player while scrolling
-	scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 40, 96);
-
 	// Load level
-	InitScrollTiles(0, &tiles, 3);
-	InitScroll(mapWidth, mapHeight, map, collision_tiles, 0, 3);
+	InitScrollTiles(0, &titlescreen_tileset, 4);
+	InitScroll(titlescreenWidth, titlescreenHeight, titlescreen, NULL, 0, 4);
 	SHOW_BKG;
 
 	// Enable audio
@@ -59,12 +59,16 @@ void Start_STATE_GAME()
 	NR51_REG = 0xFF;
 	NR50_REG = 0x77;
 
-	PlayMusic(poopster_mod_Data, 3, 1);
+	PlayMusic(tunnari_mod_Data, 3, 1);
 }
 
 // All game logic is in SpritePlayer
 void Update_STATE_GAME()
 {
+	if (level == 0 && KEY_PRESSED(J_START))
+	{
+		NextLevel();
+	}
 }
 
 void NextLevel()
@@ -73,7 +77,7 @@ void NextLevel()
 	struct Sprite *spr;
 	SPRITEMANAGER_ITERATE(i, spr)
 	{
-		if (spr->type != SPRITE_PLAYER)
+		//if (spr->type != SPRITE_PLAYER)
 		{
 			SpriteManagerRemoveSprite(spr);
 		}
@@ -81,12 +85,22 @@ void NextLevel()
 
 	if (level == 0)
 	{
-		//InitScroll(map2Width, map2Height, map2, collision_tiles, 0, 4);
+		InitScrollTiles(0, &tiles, 3);
+		InitScroll(mapWidth, mapHeight, map, collision_tiles, 0, 3);
 		level = 1;
+		
+		// Follow player while scrolling
+		scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 40, 96);
+		
+		// Play in-game music
+		PlayMusic(poopster_mod_Data, 3, 1);
 	}
 	else
 	{
-		InitScroll(mapWidth, mapHeight, map, collision_tiles, 0, 3);
+		InitScrollTiles(0, &titlescreen_tileset, 4);
+		InitScroll(titlescreenWidth, titlescreenHeight, titlescreen, NULL, 0, 4);
 		level = 0;
+		
+		PlayMusic(tunnari_mod_Data, 3, 1);
 	}
 }
