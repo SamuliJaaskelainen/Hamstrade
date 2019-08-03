@@ -6,6 +6,10 @@ UINT8 bank_SPRITE_PLAYER = 2;
 
 void NextLevel();
 
+#include "player0.h"
+#include "player1.h"
+#include "player2.h"
+#include "player3.h"
 #include "Keys.h"
 #include "SpriteManager.h"
 #include "Sound.h"
@@ -82,6 +86,26 @@ UINT8 stepSound = 0;
 UINT8 i;
 struct Sprite *spr;
 
+void UpdateSpriteSize()
+{
+    if (poopAmount == 0)
+    {
+        set_sprite_data(0, 56, player0);
+    }
+    else if (poopAmount == 1)
+    {
+        set_sprite_data(0, 56, player1);
+    }
+    else if (poopAmount == 2)
+    {
+        set_sprite_data(0, 56, player2);
+    }
+    else if (poopAmount == 3)
+    {
+        set_sprite_data(0, 56, player3);
+    }
+}
+
 // Call to reset player's state back to default
 void ResetState()
 {
@@ -93,6 +117,7 @@ void ResetState()
     jumpPeak = 0;
     poopAmount = 3;
     moveState = ONAIR;
+    UpdateSpriteSize();
 }
 
 // Set starting position and collider size
@@ -136,7 +161,7 @@ void UpdateUI()
         else
         {
             if (uiPoop[i]->anim_data == animUIPoopGone ||
-                uiPoop[i]->current_frame == animUIPoopPerish[0]-1)
+                uiPoop[i]->current_frame == animUIPoopPerish[0] - 1)
             {
                 SetSpriteAnim(uiPoop[i], animUIPoopGone, 1);
             }
@@ -144,7 +169,7 @@ void UpdateUI()
             {
                 SetSpriteAnim(uiPoop[i], animUIPoopPerish, 15);
             }
-            
+
             //uiPoop[i]->y = -8;
         }
     }
@@ -153,6 +178,7 @@ void UpdateUI()
 void SpawnPoop(UINT8 poopType)
 {
     poopAmount--;
+    UpdateSpriteSize();
 
     // POOP SOUND
     PlayFx(CHANNEL_1, 30, 0x49, 0x28, 0x39, 0x07, 0xc6);
@@ -465,6 +491,8 @@ void Update_SPRITE_PLAYER()
                     // EAT SOUND
                     PlayFx(CHANNEL_1, 30, 0x4c, 0x1a, 0x6a, 0xb0, 0xc6);
                     //PlayFx(CHANNEL_4, 5, 0x1c, 0xe5, 0x7a, 0xc0);
+
+                    UpdateSpriteSize();
                 }
             }
         }
@@ -483,6 +511,8 @@ void Update_SPRITE_PLAYER()
                     // EAT SOUND
                     PlayFx(CHANNEL_1, 30, 0x4c, 0x1a, 0x6a, 0xb0, 0xc6);
                     //PlayFx(CHANNEL_4, 5, 0x1c, 0xe5, 0x7a, 0xc0);
+
+                    UpdateSpriteSize();
                 }
             }
         }
