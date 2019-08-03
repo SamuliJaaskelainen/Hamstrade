@@ -265,6 +265,8 @@ void Update_SPRITE_PLAYER()
         }
         else if (accelY < 300)
         {
+            poopJumped = 0;
+
             if (collisionX == 0)
             {
                 accelY += 20;
